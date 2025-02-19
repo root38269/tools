@@ -119,7 +119,7 @@ body {
 }
 
 
-.decompose_result {
+.decompose_result,.search_result {
   display: grid;
   gap: var(--cell-gap);
   margin-top: 15px;
