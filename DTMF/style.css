@@ -1,0 +1,107 @@
+html {
+  width: 100%;
+  min-height: 100%;
+
+  --button-size: 70px;
+
+}
+body {
+  width: calc(100% - 16px);
+  min-height: calc(100% - 16px);
+  margin: 8px;
+}
+
+.main_title {
+  font-size: 1.7rem;
+  margin-bottom: 5px;
+}
+.main_description {
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+.main_body {
+  display: flex;
+  flex-direction: column;
+  
+  margin-left: 10px;
+
+}
+
+.section {
+  margin-bottom: 30px;
+}
+.section_title {
+  font-size: 1.3rem;
+  margin-bottom: 5px;
+}
+.section_description {
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+.section_body {
+  margin-left: 10px;
+}
+
+.play_body {
+  display: flex;
+  justify-content: center;
+
+}
+
+.phone {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+
+  width: calc(var(--button-size) * 3);
+  height: calc(var(--button-size) * 4);
+
+  margin: 10px;
+
+  border: solid 1px black;
+}
+
+.phone_button_cell {
+  /* border: solid 1px black; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.phone_button {
+  width: 55px;
+  height: 55px;
+  font-size: 40px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #ddd;
+  
+  cursor: pointer;
+}
+.phone_button:hover {
+  background-color: #ccc;
+}
+.phone_button.playing {
+  background-color: #bbf;
+}
+
+.phone_button_label {
+  line-height: 1em;
+  user-select: none;
+}
+
+
+
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.hide {
+  display: none;
+}
