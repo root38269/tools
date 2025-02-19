@@ -4,14 +4,16 @@
  * @property {string} symbol
  * @property {string} text
  * @property {string} link
+ * @property {string|undefined} pronounce
  */
 
-
+/**@type {ChemicalElement[]} */
 const elements = [
   {
     id: 1,
     symbol: "H",
     text: "水素",
+    pronounce: "スイソ",
     link: "https://ja.wikipedia.org/wiki/%E6%B0%B4%E7%B4%A0"
   },
   {
@@ -36,30 +38,35 @@ const elements = [
     id: 5,
     symbol: "B",
     text: "ホウ素",
+    pronounce: "ホウソ",
     link: "https://ja.wikipedia.org/wiki/%E3%83%9B%E3%82%A6%E7%B4%A0"
   },
   {
     id: 6,
     symbol: "C",
     text: "炭素",
+    pronounce: "タンソ",
     link: "https://ja.wikipedia.org/wiki/%E7%82%AD%E7%B4%A0"
   },
   {
     id: 7,
     symbol: "N",
     text: "窒素",
+    pronounce: "チッソ",
     link: "https://ja.wikipedia.org/wiki/%E7%AA%92%E7%B4%A0"
   },
   {
     id: 8,
     symbol: "O",
     text: "酸素",
+    pronounce: "サンソ",
     link: "https://ja.wikipedia.org/wiki/%E9%85%B8%E7%B4%A0"
   },
   {
     id: 9,
     symbol: "F",
     text: "フッ素",
+    pronounce: "フッソ",
     link: "https://ja.wikipedia.org/wiki/%E3%83%95%E3%83%83%E7%B4%A0"
   },
   {
@@ -90,6 +97,7 @@ const elements = [
     id: 14,
     symbol: "Si",
     text: "ケイ素",
+    pronounce: "ケイソ",
     link: "https://ja.wikipedia.org/wiki/%E3%82%B1%E3%82%A4%E7%B4%A0"
   },
   {
@@ -102,12 +110,14 @@ const elements = [
     id: 16,
     symbol: "S",
     text: "硫黄",
+    pronounce: "イオウ",
     link: "https://ja.wikipedia.org/wiki/%E7%A1%AB%E9%BB%84"
   },
   {
     id: 17,
     symbol: "Cl",
     text: "塩素",
+    pronounce: "エンソ",
     link: "https://ja.wikipedia.org/wiki/%E5%A1%A9%E7%B4%A0"
   },
   {
@@ -162,6 +172,7 @@ const elements = [
     id: 26,
     symbol: "Fe",
     text: "鉄",
+    pronounce: "テツ",
     link: "https://ja.wikipedia.org/wiki/%E9%89%84"
   },
   {
@@ -180,12 +191,14 @@ const elements = [
     id: 29,
     symbol: "Cu",
     text: "銅",
+    pronounce: "ドウ",
     link: "https://ja.wikipedia.org/wiki/%E9%8A%85"
   },
   {
     id: 30,
     symbol: "Zn",
     text: "亜鉛",
+    pronounce: "アエン",
     link: "https://ja.wikipedia.org/wiki/%E4%BA%9C%E9%89%9B"
   },
   {
@@ -204,6 +217,7 @@ const elements = [
     id: 33,
     symbol: "As",
     text: "ヒ素",
+    pronounce: "ヒソ",
     link: "https://ja.wikipedia.org/wiki/%E3%83%92%E7%B4%A0"
   },
   {
@@ -216,6 +230,7 @@ const elements = [
     id: 35,
     symbol: "Br",
     text: "臭素",
+    pronounce: "シュウソ",
     link: "https://ja.wikipedia.org/wiki/%E8%87%AD%E7%B4%A0"
   },
   {
@@ -288,6 +303,7 @@ const elements = [
     id: 47,
     symbol: "Ag",
     text: "銀",
+    pronounce: "ギン",
     link: "https://ja.wikipedia.org/wiki/%E9%8A%80"
   },
   {
@@ -324,6 +340,7 @@ const elements = [
     id: 53,
     symbol: "I",
     text: "ヨウ素",
+    pronounce: "ヨウソ",
     link: "https://ja.wikipedia.org/wiki/%E3%83%A8%E3%82%A6%E7%B4%A0"
   },
   {
@@ -474,18 +491,21 @@ const elements = [
     id: 78,
     symbol: "Pt",
     text: "白金",
+    pronounce: "ハッキン",
     link: "https://ja.wikipedia.org/wiki/%E7%99%BD%E9%87%91"
   },
   {
     id: 79,
     symbol: "Au",
     text: "金",
+    pronounce: "キン",
     link: "https://ja.wikipedia.org/wiki/%E9%87%91"
   },
   {
     id: 80,
     symbol: "Hg",
     text: "水銀",
+    pronounce: "スイギン",
     link: "https://ja.wikipedia.org/wiki/%E6%B0%B4%E9%8A%80"
   },
   {
@@ -498,6 +518,7 @@ const elements = [
     id: 82,
     symbol: "Pb",
     text: "鉛",
+    pronounce: "ナマリ",
     link: "https://ja.wikipedia.org/wiki/%E9%89%9B"
   },
   {
@@ -718,6 +739,143 @@ const elements = [
   }
 ]
 
+const hira = [
+  "あ","い","う","え","お",
+  "か","き","く","け","こ",
+  "さ","し","す","せ","そ",
+  "た","ち","つ","て","と",
+  "な","に","ぬ","ね","の",
+  "は","ひ","ふ","へ","ほ",
+  "ま","み","む","め","も",
+  "や","ゆ","よ",
+  "ら","り","る","れ","ろ",
+  "わ","ゐ","ゑ","を","ん",
+  "が","ぎ","ぐ","げ","ご",
+  "ざ","じ","ず","ぜ","ぞ",
+  "だ","ぢ","づ","で","ど",
+  "ば","び","ぶ","べ","ぼ",
+  "ぱ","ぴ","ぷ","ぺ","ぽ",
+  "ぁ","ぃ","ぅ","ぇ","ぉ",
+  "ゃ","ゅ","ょ","ゎ","っ"
+];
+const kata = [
+  "ア","イ","ウ","エ","オ",
+  "カ","キ","ク","ケ","コ",
+  "サ","シ","ス","セ","ソ",
+  "タ","チ","ツ","テ","ト",
+  "ナ","ニ","ヌ","ネ","ノ",
+  "ハ","ヒ","フ","ヘ","ホ",
+  "マ","ミ","ム","メ","モ",
+  "ヤ","ユ","ヨ",
+  "ラ","リ","ル","レ","ロ",
+  "ワ","ヰ","ヱ","ヲ","ン",
+  "ガ","ギ","グ","ゲ","ゴ",
+  "ザ","ジ","ズ","ゼ","ゾ",
+  "ダ","ヂ","ヅ","デ","ド",
+  "バ","ビ","ブ","ベ","ボ",
+  "パ","ピ","プ","ペ","ポ",
+  "ァ","ィ","ゥ","ェ","ォ",
+  "ャ","ュ","ョ","ヮ","ッ"
+];
+
+/**
+ * 
+ * @param {string} text 
+ */
+function hira2akta (text) {
+  let arr = text.split("");
+  let result = [];
+  for (let i = 0; i < arr.length; i++) {
+    let index = hira.indexOf(arr[i]);
+    if (index === -1) {
+      result.push(arr[i]);
+    }else{
+      result.push(kata[index]);
+    }
+  }
+  return result.join("");
+}
+
+/**
+ * 
+ * @param {string} text 
+ * @returns {ChemicalElement[]}
+ */
+function element_search (text) {
+  let result = new Set();
+  elements.forEach(function (value) { // 完全一致
+    if (String(value.id) === text) {
+      result.add(value);
+    }else if (value.symbol === text) {
+      result.add(value);
+    }else if (value.text === text) {
+      result.add(value);
+    }
+  });
+  elements.forEach(function (value) { // 大文字小文字を区別しない完全一致
+    if (value.symbol.toLowerCase() === text.toLowerCase()) {
+      result.add(value);
+    }else if (value.pronounce === hira2akta(text)) {
+      result.add(value);
+    }
+  });
+  elements.forEach(function (value) { // 前方一致
+    if (value.symbol.toLowerCase().indexOf(text.toLowerCase()) === 0) {
+      result.add(value);
+    }else if (value.text.indexOf(hira2akta(text)) === 0) {
+      result.add(value);
+    }else if (value.pronounce !== undefined) {
+      if (value.pronounce.indexOf(hira2akta(text)) === 0) {
+        result.add(value);
+      }
+    }
+  });
+  elements.forEach(function (value) { // 部分一致
+    if (value.symbol.toLowerCase().indexOf(text.toLowerCase()) > 0) {
+      result.add(value);
+    }else if (value.text.indexOf(hira2akta(text)) > 0) {
+      result.add(value);
+    }else if (value.pronounce !== undefined) {
+      if (value.pronounce.indexOf(hira2akta(text)) > 0) {
+        result.add(value);
+      }
+    }
+  });
+  return Array.from(result);
+}
+
+const div_search_result = document.getElementById("search_result");
+const input_search_text = document.getElementById("search_text");
+const input_search_btn = document.getElementById("search_btn");
+
+input_search_btn.addEventListener("click", function (event) {
+  let text = input_search_text.value;
+  if (text === "") return;
+  Array.from(div_search_result.children).forEach(function (value) {
+    div_search_result.removeChild(value);
+  });
+  div_search_result.style.gridTemplateRows = "";
+  div_search_result.style.gridTemplateColumns = "";
+  let result = element_search(text);
+  if (result.length === 0) return;
+  let columns = 15;
+  div_search_result.style.gridTemplateRows = `repeat(${Math.floor((result.length - 1) / columns) + 1}, var(--cell-height))`
+  if (result.length > columns) {
+    div_search_result.style.gridTemplateColumns = `repeat(15, var(--cell-width))`;
+  }else{
+    div_search_result.style.gridTemplateColumns = `repeat(${result.length}, var(--cell-width))`;
+  }
+  for (let i = 0; i < result.length; i++) {
+    let row = Math.floor(i / columns) + 1;
+    let col = (i % columns) + 1;
+    let element_cell = document.createElement("div");
+    element_cell.classList.add("element_cell");
+    element_cell.style.gridArea = row + "/" + col;
+    setup_element_cell(element_cell, result[i]);
+    div_search_result.appendChild(element_cell);
+  }
+});
+
 
 
 /**
@@ -812,32 +970,10 @@ input_decompose.addEventListener("click", function (event) {
     div_decompose_result.style.gridTemplateColumns = `repeat(${col_num}, var(--cell-width))`;
     for (let i = 0; i < row_num; i++) {
       for (let j = 0; j < result[i].length; j++) {
-        let element = result[i][j];
         let element_cell = document.createElement("div");
         element_cell.classList.add("element_cell");
         element_cell.style.gridArea = (i+1) + "/" + (j+1);
-        let div_id = document.createElement("div");
-        div_id.classList.add("id");
-        div_id.innerText = String(element.id);
-        let div_symbol = document.createElement("div");
-        div_symbol.classList.add("symbol");
-        div_symbol.innerText = String(element.symbol);
-        let div_text = document.createElement("div");
-        div_text.classList.add("text");
-        div_text.innerText = String(element.text);
-        if (element.text.length === 7) {
-          div_text.style.fontSize = "calc(var(--cell-text-font-size) * 0.85)";
-        }else if (element.text.length === 8) {
-          div_text.style.fontSize = "calc(var(--cell-text-font-size) * 0.75)";
-        }else if (element.text.length === 9) {
-          div_text.style.fontSize = "calc(var(--cell-text-font-size) * 0.65)";
-        }
-        element_cell.appendChild(div_id);
-        element_cell.appendChild(div_symbol);
-        element_cell.appendChild(div_text);
-        element_cell.addEventListener("click", function (event) {
-          select_chemical_element(element.id);
-        });
+        setup_element_cell(element_cell, result[i][j]);
         div_decompose_result.appendChild(element_cell);
       }
     }
@@ -861,33 +997,42 @@ input_table_size_number.addEventListener("change", function (event) {
 
 const div_table_body = document.getElementById("table_body");
 
+/**
+ * 
+ * @param {HTMLDivElement} element_cell 
+ * @param {ChemicalElement} element
+ */
+function setup_element_cell (element_cell, element) {
+  let div_id = document.createElement("div");
+  div_id.classList.add("id");
+  div_id.innerText = String(element.id);
+  let div_symbol = document.createElement("div");
+  div_symbol.classList.add("symbol");
+  div_symbol.innerText = String(element.symbol);
+  let div_text = document.createElement("div");
+  div_text.classList.add("text");
+  div_text.innerText = String(element.text);
+  if (element.text.length === 7) {
+    div_text.style.fontSize = "calc(var(--cell-text-font-size) * 0.85)";
+  }else if (element.text.length === 8) {
+    div_text.style.fontSize = "calc(var(--cell-text-font-size) * 0.75)";
+  }else if (element.text.length === 9) {
+    div_text.style.fontSize = "calc(var(--cell-text-font-size) * 0.65)";
+  }
+  element_cell.appendChild(div_id);
+  element_cell.appendChild(div_symbol);
+  element_cell.appendChild(div_text);
+  element_cell.addEventListener("click", function (event) {
+    select_chemical_element(element.id);
+  });
+}
+
 function init () {
   Array.from(div_table_body.getElementsByClassName("element_cell")).forEach(function (value) {
     let id = Number(value.id.slice(1));
     let element = elements.find((value) => (value.id === id));
     if (element !== undefined) {
-      let div_id = document.createElement("div");
-      div_id.classList.add("id");
-      div_id.innerText = String(element.id);
-      let div_symbol = document.createElement("div");
-      div_symbol.classList.add("symbol");
-      div_symbol.innerText = String(element.symbol);
-      let div_text = document.createElement("div");
-      div_text.classList.add("text");
-      div_text.innerText = String(element.text);
-      if (element.text.length === 7) {
-        div_text.style.fontSize = "calc(var(--cell-text-font-size) * 0.85)";
-      }else if (element.text.length === 8) {
-        div_text.style.fontSize = "calc(var(--cell-text-font-size) * 0.75)";
-      }else if (element.text.length === 9) {
-        div_text.style.fontSize = "calc(var(--cell-text-font-size) * 0.65)";
-      }
-      value.appendChild(div_id);
-      value.appendChild(div_symbol);
-      value.appendChild(div_text);
-      value.addEventListener("click", function (event) {
-        select_chemical_element(element.id);
-      });
+      setup_element_cell(value, element);
     }
   });
 
