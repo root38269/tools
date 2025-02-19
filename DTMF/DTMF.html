@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="style.css">
+    <title>DTMF信号ツール</title>
+  </head>
+  <body>
+    <div class="main_title">
+      DTMF信号ツール
+    </div>
+    <div class="main_description">
+      DTMF信号とは… 電話のボタンを押したときに鳴る「ピ ポ パ」という音のこと。
+      <a href="https://ja.wikipedia.org/wiki/DTMF">wikipedia</a>
+    </div>
+    <div class="main_body">
+
+      <div class="section_single_play section">
+        <div class="section_title">
+          プッシュ音を聞く
+        </div>
+        <div class="section_description">
+          下のボタンを押すとプッシュ音を聞くことができます。キーボードも可(「#」は代わりに「.」を押してください)。
+        </div>
+        <div class="play_body section_body">
+          <div class="phone" id="phone">
+            
+          </div>
+        </div>
+      </div>
+      <div class="section_number_play section">
+        <div class="section_title">
+          電話番号を聞く
+        </div>
+        <div class="section_description">
+          電話番号の入力を再現します。
+          音の長さと間隔、電話番号(数字の羅列)を入力して再生ボタンを押します。
+        </div>
+        <div class="section_body">
+          <input type="button" value="再生" id="phone_number_play"><br>
+          番号　　 <input type="text" id="phone_number" value="012 345 6789"><br>
+          音の長さ <input type="number" id="play_time" value="200">ms<br>
+          音の間隔 <input type="number" id="play_interval" value="50">ms
+        </div>
+      </div>
+      <div class="section_input section hide">
+        <div class="section_title">
+          信号を読み取る
+        </div>
+        <div class="section_description">
+          マイクの音声からプッシュ音を読み取って表示します。
+        </div>
+        <div class="section_body">
+          <input type="button" value="読み取る" id="input_start">
+          <span id="input_message">(マイクへのアクセスが必要です)</span><br>
+          <input type="button" value="停止" id="input_stop"><br>
+          結果 <input type="text" id="input_result" value=""><br>
+          ピーク: <span id="peak_label">,</span>
+        </div>
+      </div>
+    </div>
+    
+
+    
+    <canvas id="canvas"></canvas>
+
+    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="audio.js"></script>
+  </body>
+</html>
