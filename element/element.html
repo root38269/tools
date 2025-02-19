@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>元素記号ツール</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="content_area">
+        <div class="page_title">
+          元素記号ツール
+        </div>
+        <div class="table_size_changer">
+          表のサイズ
+          <input id="table_size_range" type="range" min="4" max="25" step="1" value="10" style="margin-left: 30px;">
+          <input id="table_size_number" type="number" min="4" max="25" step="1" value="10">
+        </div>
+        <div class="section table close">
+          <div class="section_title">
+            <div class="oc_button"></div>
+            <span>周期表</span>
+          </div>
+          <div class="section_body">
+            <div class="description">
+              周期表について
+              <a href="https://ja.wikipedia.org/wiki/%E5%91%A8%E6%9C%9F%E8%A1%A8">https://ja.wikipedia.org/wiki/%E5%91%A8%E6%9C%9F%E8%A1%A8</a>
+            </div>
+            <div class="table_body" id="table_body">
+              <div class="element_header" style="grid-area: 1/1;">
+                
+                <span style="position: absolute;left: 0;bottom: 0;">周期</span>
+                <span style="position: absolute;right: 0;top: 0;">族</span>
+              </div>
+              <div class="element_header" style="grid-area: 1/2;">1</div>
+              <div class="element_header" style="grid-area: 1/3;">2</div>
+              <div class="element_header" style="grid-area: 1/4;">3</div>
+              <div class="element_header" style="grid-area: 1/5;">4</div>
+              <div class="element_header" style="grid-area: 1/6;">5</div>
+              <div class="element_header" style="grid-area: 1/7;">6</div>
+              <div class="element_header" style="grid-area: 1/8;">7</div>
+              <div class="element_header" style="grid-area: 1/9;">8</div>
+              <div class="element_header" style="grid-area: 1/10;">9</div>
+              <div class="element_header" style="grid-area: 1/11;">10</div>
+              <div class="element_header" style="grid-area: 1/12;">11</div>
+              <div class="element_header" style="grid-area: 1/13;">12</div>
+              <div class="element_header" style="grid-area: 1/14;">13</div>
+              <div class="element_header" style="grid-area: 1/15;">14</div>
+              <div class="element_header" style="grid-area: 1/16;">15</div>
+              <div class="element_header" style="grid-area: 1/17;">16</div>
+              <div class="element_header" style="grid-area: 1/18;">17</div>
+              <div class="element_header" style="grid-area: 1/19;">18</div>
+              
+              <div class="element_header" style="grid-area: 2/1;">1</div>
+              <div class="element_header" style="grid-area: 3/1;">2</div>
+              <div class="element_header" style="grid-area: 4/1;">3</div>
+              <div class="element_header" style="grid-area: 5/1;">4</div>
+              <div class="element_header" style="grid-area: 6/1;">5</div>
+              <div class="element_header" style="grid-area: 7/1;">6</div>
+              <div class="element_header" style="grid-area: 8/1;">7</div>
+              
+              <div class="element_header" style="grid-area: 10/1;text-align: center;">※1<br>ランタノイド系</div>
+              <div class="element_header" style="grid-area: 11/1;text-align: center;">※2<br>アクチノイド系</div>
+              
+              
+              <div class="element_cell" id="t1" style="grid-area: 2/2;">
+                <!--
+                <div class="id">1</div>
+                <div class="symbol">H</div>
+                <div class="text">水素</div>
+                -->
+              </div>
+              <div class="element_cell" id="t2" style="grid-area: 2/19;">
+                <!--
+                <div class="id">2</div>
+                <div class="symbol">He</div>
+                <div class="text">ヘリウム</div>
+                -->
+              </div>
+              <div class="element_cell" id="t3" style="grid-area: 3/2;"></div>
+              <div class="element_cell" id="t4" style="grid-area: 3/3;"></div>
+              <div class="element_cell" id="t5" style="grid-area: 3/14;"></div>
+              <div class="element_cell" id="t6" style="grid-area: 3/15;"></div>
+              <div class="element_cell" id="t7" style="grid-area: 3/16;"></div>
+              <div class="element_cell" id="t8" style="grid-area: 3/17;"></div>
+              <div class="element_cell" id="t9" style="grid-area: 3/18;"></div>
+              <div class="element_cell" id="t10" style="grid-area: 3/19;"></div>
+              <div class="element_cell" id="t11" style="grid-area: 4/2;"></div>
+              <div class="element_cell" id="t12" style="grid-area: 4/3;"></div>
+              <div class="element_cell" id="t13" style="grid-area: 4/14;"></div>
+              <div class="element_cell" id="t14" style="grid-area: 4/15;"></div>
+              <div class="element_cell" id="t15" style="grid-area: 4/16;"></div>
+              <div class="element_cell" id="t16" style="grid-area: 4/17;"></div>
+              <div class="element_cell" id="t17" style="grid-area: 4/18;"></div>
+              <div class="element_cell" id="t18" style="grid-area: 4/19;"></div>
+              <div class="element_cell" id="t19" style="grid-area: 5/2;"></div>
+              <div class="element_cell" id="t20" style="grid-area: 5/3;"></div>
+              <div class="element_cell" id="t21" style="grid-area: 5/4;"></div>
+              <div class="element_cell" id="t22" style="grid-area: 5/5;"></div>
+              <div class="element_cell" id="t23" style="grid-area: 5/6;"></div>
+              <div class="element_cell" id="t24" style="grid-area: 5/7;"></div>
+              <div class="element_cell" id="t25" style="grid-area: 5/8;"></div>
+              <div class="element_cell" id="t26" style="grid-area: 5/9;"></div>
+              <div class="element_cell" id="t27" style="grid-area: 5/10;"></div>
+              <div class="element_cell" id="t28" style="grid-area: 5/11;"></div>
+              <div class="element_cell" id="t29" style="grid-area: 5/12;"></div>
+              <div class="element_cell" id="t30" style="grid-area: 5/13;"></div>
+              <div class="element_cell" id="t31" style="grid-area: 5/14;"></div>
+              <div class="element_cell" id="t32" style="grid-area: 5/15;"></div>
+              <div class="element_cell" id="t33" style="grid-area: 5/16;"></div>
+              <div class="element_cell" id="t34" style="grid-area: 5/17;"></div>
+              <div class="element_cell" id="t35" style="grid-area: 5/18;"></div>
+              <div class="element_cell" id="t36" style="grid-area: 5/19;"></div>
+              <div class="element_cell" id="t37" style="grid-area: 6/2;"></div>
+              <div class="element_cell" id="t38" style="grid-area: 6/3;"></div>
+              <div class="element_cell" id="t39" style="grid-area: 6/4;"></div>
+              <div class="element_cell" id="t40" style="grid-area: 6/5;"></div>
+              <div class="element_cell" id="t41" style="grid-area: 6/6;"></div>
+              <div class="element_cell" id="t42" style="grid-area: 6/7;"></div>
+              <div class="element_cell" id="t43" style="grid-area: 6/8;"></div>
+              <div class="element_cell" id="t44" style="grid-area: 6/9;"></div>
+              <div class="element_cell" id="t45" style="grid-area: 6/10;"></div>
+              <div class="element_cell" id="t46" style="grid-area: 6/11;"></div>
+              <div class="element_cell" id="t47" style="grid-area: 6/12;"></div>
+              <div class="element_cell" id="t48" style="grid-area: 6/13;"></div>
+              <div class="element_cell" id="t49" style="grid-area: 6/14;"></div>
+              <div class="element_cell" id="t50" style="grid-area: 6/15;"></div>
+              <div class="element_cell" id="t51" style="grid-area: 6/16;"></div>
+              <div class="element_cell" id="t52" style="grid-area: 6/17;"></div>
+              <div class="element_cell" id="t53" style="grid-area: 6/18;"></div>
+              <div class="element_cell" id="t54" style="grid-area: 6/19;"></div>
+              <div class="element_cell" id="t55" style="grid-area: 7/2;"></div>
+              <div class="element_cell" id="t56" style="grid-area: 7/3;"></div>
+              <div class="element_cell" id="" style="grid-area: 7/4;">※1</div>
+              <div class="element_cell" id="t72" style="grid-area: 7/5;"></div>
+              <div class="element_cell" id="t73" style="grid-area: 7/6;"></div>
+              <div class="element_cell" id="t74" style="grid-area: 7/7;"></div>
+              <div class="element_cell" id="t75" style="grid-area: 7/8;"></div>
+              <div class="element_cell" id="t76" style="grid-area: 7/9;"></div>
+              <div class="element_cell" id="t77" style="grid-area: 7/10;"></div>
+              <div class="element_cell" id="t78" style="grid-area: 7/11;"></div>
+              <div class="element_cell" id="t79" style="grid-area: 7/12;"></div>
+              <div class="element_cell" id="t80" style="grid-area: 7/13;"></div>
+              <div class="element_cell" id="t81" style="grid-area: 7/14;"></div>
+              <div class="element_cell" id="t82" style="grid-area: 7/15;"></div>
+              <div class="element_cell" id="t83" style="grid-area: 7/16;"></div>
+              <div class="element_cell" id="t84" style="grid-area: 7/17;"></div>
+              <div class="element_cell" id="t85" style="grid-area: 7/18;"></div>
+              <div class="element_cell" id="t86" style="grid-area: 7/19;"></div>
+              <div class="element_cell" id="t87" style="grid-area: 8/2;"></div>
+              <div class="element_cell" id="t88" style="grid-area: 8/3;"></div>
+              <div class="element_cell" id="" style="grid-area: 8/4;">※2</div>
+              <div class="element_cell" id="t104" style="grid-area: 8/5;"></div>
+              <div class="element_cell" id="t105" style="grid-area: 8/6;"></div>
+              <div class="element_cell" id="t106" style="grid-area: 8/7;"></div>
+              <div class="element_cell" id="t107" style="grid-area: 8/8;"></div>
+              <div class="element_cell" id="t108" style="grid-area: 8/9;"></div>
+              <div class="element_cell" id="t109" style="grid-area: 8/10;"></div>
+              <div class="element_cell" id="t110" style="grid-area: 8/11;"></div>
+              <div class="element_cell" id="t111" style="grid-area: 8/12;"></div>
+              <div class="element_cell" id="t112" style="grid-area: 8/13;"></div>
+              <div class="element_cell" id="t113" style="grid-area: 8/14;"></div>
+              <div class="element_cell" id="t114" style="grid-area: 8/15;"></div>
+              <div class="element_cell" id="t115" style="grid-area: 8/16;"></div>
+              <div class="element_cell" id="t116" style="grid-area: 8/17;"></div>
+              <div class="element_cell" id="t117" style="grid-area: 8/18;"></div>
+              <div class="element_cell" id="t118" style="grid-area: 8/19;"></div>
+              
+              <div class="element_cell" id="t57" style="grid-area: 10/2;"></div>
+              <div class="element_cell" id="t58" style="grid-area: 10/3;"></div>
+              <div class="element_cell" id="t59" style="grid-area: 10/4;"></div>
+              <div class="element_cell" id="t60" style="grid-area: 10/5;"></div>
+              <div class="element_cell" id="t61" style="grid-area: 10/6;"></div>
+              <div class="element_cell" id="t62" style="grid-area: 10/7;"></div>
+              <div class="element_cell" id="t63" style="grid-area: 10/8;"></div>
+              <div class="element_cell" id="t64" style="grid-area: 10/9;"></div>
+              <div class="element_cell" id="t65" style="grid-area: 10/10;"></div>
+              <div class="element_cell" id="t66" style="grid-area: 10/11;"></div>
+              <div class="element_cell" id="t67" style="grid-area: 10/12;"></div>
+              <div class="element_cell" id="t68" style="grid-area: 10/13;"></div>
+              <div class="element_cell" id="t69" style="grid-area: 10/14;"></div>
+              <div class="element_cell" id="t70" style="grid-area: 10/15;"></div>
+              <div class="element_cell" id="t71" style="grid-area: 10/16;"></div>
+              <div class="element_cell" id="t89" style="grid-area: 11/2;"></div>
+              <div class="element_cell" id="t90" style="grid-area: 11/3;"></div>
+              <div class="element_cell" id="t91" style="grid-area: 11/4;"></div>
+              <div class="element_cell" id="t92" style="grid-area: 11/5;"></div>
+              <div class="element_cell" id="t93" style="grid-area: 11/6;"></div>
+              <div class="element_cell" id="t94" style="grid-area: 11/7;"></div>
+              <div class="element_cell" id="t95" style="grid-area: 11/8;"></div>
+              <div class="element_cell" id="t96" style="grid-area: 11/9;"></div>
+              <div class="element_cell" id="t97" style="grid-area: 11/10;"></div>
+              <div class="element_cell" id="t98" style="grid-area: 11/11;"></div>
+              <div class="element_cell" id="t99" style="grid-area: 11/12;"></div>
+              <div class="element_cell" id="t100" style="grid-area: 11/13;"></div>
+              <div class="element_cell" id="t101" style="grid-area: 11/14;"></div>
+              <div class="element_cell" id="t102" style="grid-area: 11/15;"></div>
+              <div class="element_cell" id="t103" style="grid-area: 11/16;"></div>
+            </div>
+            <div class="extended">
+              119番以降の周期表について<br>
+              <a href="https://ja.wikipedia.org/wiki/%E6%8B%A1%E5%BC%B5%E5%91%A8%E6%9C%9F%E8%A1%A8">https://ja.wikipedia.org/wiki/%E6%8B%A1%E5%BC%B5%E5%91%A8%E6%9C%9F%E8%A1%A8</a>
+            </div>
+          </div>
+        </div>
+        <div class="section decompose open">
+          <div class="section_title">
+            <div class="oc_button"></div>
+            元素記号分解
+          </div>
+          <div class="section_body">
+            <div class="description">
+              <span>
+                アルファベットの文字列を元素記号の列に分解します。
+                まずは「chocolate」でお試し下さい。
+              </span>
+            </div>
+  
+            <input type="text" value="chocolate" id="decompose_text">
+            <input type="button" id="decompose" value="分解">
+            <span id="decompose_message"></span>
+            <br>
+            <span id="decompose_result_text"></span>
+            <div id="decompose_result" class="decompose_result"></div>
+          </div>
+        </div>
+        <div style="height: 20px;"></div>
+      </div>
+      <div class="side_area hide" id="side_area">
+        <div class="close_button" id="side_close"></div>
+        <div class="element_detail">
+          <div class="detail_title">
+            元素詳細
+          </div>
+          <div class="detail_content">
+            <div class="detail_field">
+              <span class="field_label">原子番号</span>
+              <span class="field_split">:</span>
+              <span class="field_value" id="detail_id">--</span>
+            </div>
+            <div class="detail_field">
+              <span class="field_label">元素記号</span>
+              <span class="field_split">:</span>
+              <span class="field_value" id="detail_symbol" style="font-size: 3rem;">--</span>
+            </div>
+            <div class="detail_field">
+              <span class="field_label">元素名</span>
+              <span class="field_split">:</span>
+              <span class="field_value" id="detail_text">--</span>
+            </div>
+            <div class="detail_field">
+              <span class="field_label">wikipedia</span>
+              <span class="field_split">:</span>
+              <span class="field_value" id="detail_link">リンク</span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>
