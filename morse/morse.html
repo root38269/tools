@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+  <title>Morse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <body>
+
+    <div class="main_area">
+      <div class="input_area">
+        <div class="input_label">
+          <span>↓文章を入力</span>
+        </div>
+        <div class="input_box">
+          <textarea class="input_text" id="input_text1"></textarea>
+          <div class="option_box">
+            言語を選択<br>
+            <select name="input_lang" id="input_lang">
+              <option value="en">英語</option>
+              <option value="ja">日本語</option>
+              <option value="el">ギリシャ語</option>
+              <option value="cyri">キリル文字</option>
+              <option value="hebr">ヘブライ語</option>
+              <option value="arab">アラビア語</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="input_area">
+        <div class="input_label">
+          <span>↓モールス信号に変換</span>
+        </div>
+        <div class="input_box">
+          <textarea class="input_text" id="input_text2"></textarea>
+          <div class="option_box">
+            短点　　　: <input type="text" class="morse_option_text" value="・" id="morse_dot"><br>
+            長点　　　: <input type="text" class="morse_option_text" value="－" id="morse_dash"><br>
+            文字区切り: <input type="text" class="morse_option_text" value=", " id="morse_char_split"><br>
+            単語区切り: <input type="text" class="morse_option_text" value="; " id="morse_word_split"><br>
+            <input type="button" value="再生" id="play"><br>
+            音量(<span id="volume_label">10</span>%)<br>
+            <input type="range" min="0" max="100" step="1" value="10" id="volume" class="volume"><br>
+            <input type="checkbox" id="input_morse">
+            <label for="input_morse">モールス信号を入力(shiftキー)</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="output_area">
+        <div class="output_label">
+          <span>↓文章に再変換</span>
+        </div>
+        <div class="output_box">
+          <textarea class="output_text" readonly id="output_text"></textarea>
+          <div class="option_box">
+            言語を選択<br>
+            <select name="output_lang" id="output_lang">
+              <option value="en">英語</option>
+              <option value="ja">日本語</option>
+              <option value="el">ギリシャ語</option>
+              <option value="cyri">キリル文字</option>
+              <option value="hebr">ヘブライ語</option>
+              <option value="arab">アラビア語</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="table_area">
+      <div class="table_area_title">コード表</div>
+      <div class="select_area">
+        言語を選択
+        <select id="select_table">
+          <option value="en" selected>英語</option>
+          <option value="ja_iroha">日本語(イロハ順)</option>
+          <option value="ja_aiu">日本語(五十音順)</option>
+          <option value="el">ギリシャ語</option>
+          <option value="cyri">キリル文字</option>
+          <option value="hebr">ヘブライ語</option>
+          <option value="arab">アラビア語</option>
+        </select>
+      </div>
+      <div class="table_wrap" id="table_wrap">
+        <table id="table_en" class="show">
+          <thead>
+            <tr class="under_double"><th>文字</th><th>コード</th><th>文字</th><th>コード</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="char">A</td><td class="code">・－</td><td class="char">N</td><td class="code">－・</td></tr></tr>
+            <tr><td class="char">B</td><td class="code">－・・・</td><td class="char">O</td><td class="code">－－－</td><tr></tr>
+            <tr><td class="char">C</td><td class="code">－・－・</td><td class="char">P</td><td class="code">・－－・</td></tr>
+            <tr><td class="char">D</td><td class="code">－・・</td>  <td class="char">Q</td><td class="code">－－・－</td></tr>
+            <tr><td class="char">E</td><td class="code">・</td>      <td class="char">R</td><td class="code">・－・</td><tr></tr>
+            <tr><td class="char">F</td><td class="code">・・－・</td><td class="char">S</td><td class="code">・・・</td><tr></tr>
+            <tr><td class="char">G</td><td class="code">－－・</td>  <td class="char">T</td><td class="code">－</td></ttr></tr>
+            <tr><td class="char">H</td><td class="code">・・・・</td><td class="char">U</td><td class="code">・・－</td><tr></tr>
+            <tr><td class="char">I</td><td class="code">・・</td>    <td class="char">V</td><td class="code">・・・－</td></tr>
+            <tr><td class="char">J</td><td class="code">・－－－</td><td class="char">W</td><td class="code">・－－</td><tr></tr>
+            <tr><td class="char">K</td><td class="code">－・－</td>  <td class="char">X</td><td class="code">－・・－</td></tr>
+            <tr><td class="char">L</td><td class="code">・－・・</td><td class="char">Y</td><td class="code">－・－－</td></tr>
+            <tr class="under_double"><td class="char">M</td><td class="code">－－</td>    <td class="char">Z</td><td class="code">－－・・</td></tr>
+            
+            <tr><td class="char">1</td><td class="code">・－－－－</td><td class="char">6</td><td class="code">－・・・・</td></tr>
+            <tr><td class="char">2</td><td class="code">・・－－－</td><td class="char">7</td><td class="code">－－・・・</td></tr>
+            <tr><td class="char">3</td><td class="code">・・・－－</td><td class="char">8</td><td class="code">－－－・・</td></tr>
+            <tr><td class="char">4</td><td class="code">・・・・－</td><td class="char">9</td><td class="code">－－－－・</td></tr>
+            <tr class="under_double"><td class="char">5</td><td class="code">・・・・・</td><td class="char">0</td><td class="code">－－－－－</td></tr>
+            
+            <tr><td class="char">.</td><td class="code">・－・－・－</td><td class="char">^</td><td class="code">・・・・・・</td></tr>
+            <tr><td class="char">,</td><td class="code">－－・・－－</td><td class="char">/</td><td class="code">－・・－・</td>  </tr>
+            <tr><td class="char">:</td><td class="code">－－－・・・</td><td class="char">@</td><td class="code">・－－・－・</td></tr>
+            <tr><td class="char">?</td><td class="code">・・－－・・</td><td class="char">(</td><td class="code">－・－－・</td>  </tr>
+            <tr><td class="char">_</td><td class="code">・・－－・－</td><td class="char">)</td><td class="code">－・－－・－</td></tr>
+            <tr><td class="char">+</td><td class="code">・－・－・</td>  <td class="char">"</td><td class="code">・－・・－・</td></tr>
+            <tr><td class="char">-</td><td class="code">－・・・・－</td><td class="char">'</td><td class="code">・－－－－・</td></tr>
+            <tr><td class="char">×</td><td class="code">－・・－</td>   <td class="char"></td><td class="code"></td></tr>
+            
+          </tbody>
+        </table>
+        <table id="table_ja_iroha" class="hide">
+          <thead>
+            <tr class="under_double"><th>文字</th><th>コード</th><th>文字</th><th>コード</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="char">イ</td><td class="code">・－</td>      <td class="char">ウ</td><td class="code">・・－</td>    </tr>
+            <tr><td class="char">ロ</td><td class="code">・－・－</td>  <td class="char">ヰ</td><td class="code">・－・・－</td></tr>
+            <tr><td class="char">ハ</td><td class="code">－・・・</td>  <td class="char">ノ</td><td class="code">・・－－</td>  </tr>
+            <tr><td class="char">ニ</td><td class="code">－・－・</td>  <td class="char">オ</td><td class="code">・－・・・</td></tr>
+            <tr><td class="char">ホ</td><td class="code">－・・</td>    <td class="char">ク</td><td class="code">・・・－</td>  </tr>
+            <tr><td class="char">ヘ</td><td class="code">・</td>        <td class="char">ヤ</td><td class="code">・－－</td>    </tr>
+            <tr><td class="char">ト</td><td class="code">・・－・・</td><td class="char">マ</td><td class="code">－・・－</td>  </tr>
+            <tr><td class="char">チ</td><td class="code">・・－・</td>  <td class="char">ケ</td><td class="code">－・－－</td>  </tr>
+            <tr><td class="char">リ</td><td class="code">－－・</td>    <td class="char">フ</td><td class="code">－－・・</td>  </tr>
+            <tr><td class="char">ヌ</td><td class="code">・・・・</td>  <td class="char">コ</td><td class="code">－－－－</td>  </tr>
+            <tr><td class="char">ル</td><td class="code">－・－－・</td><td class="char">エ</td><td class="code">－・－－－</td></tr>
+            <tr><td class="char">ヲ</td><td class="code">・－－－</td>  <td class="char">テ</td><td class="code">・－・－－</td></tr>
+            <tr><td class="char">ワ</td><td class="code">－・－</td>    <td class="char">ア</td><td class="code">－－・－－</td></tr>
+            <tr><td class="char">カ</td><td class="code">・－・・</td>  <td class="char">サ</td><td class="code">－・－・－</td></tr>
+            <tr><td class="char">ヨ</td><td class="code">－－</td>      <td class="char">キ</td><td class="code">－・－・・</td></tr>
+            <tr><td class="char">タ</td><td class="code">－・</td>      <td class="char">ユ</td><td class="code">－・・－－</td></tr>
+            <tr><td class="char">レ</td><td class="code">－－－</td>    <td class="char">メ</td><td class="code">－・・・－</td></tr>
+            <tr><td class="char">ソ</td><td class="code">－－－・</td>  <td class="char">ミ</td><td class="code">・・－・－</td></tr>
+            <tr><td class="char">ツ</td><td class="code">・－－・</td>  <td class="char">シ</td><td class="code">－－・－・</td></tr>
+            <tr><td class="char">ネ</td><td class="code">－－・－</td>  <td class="char">ヱ</td><td class="code">・－－・・</td></tr>
+            <tr><td class="char">ナ</td><td class="code">・－・</td>    <td class="char">ヒ</td><td class="code">－－・・－</td></tr>
+            <tr><td class="char">ラ</td><td class="code">・・・</td>    <td class="char">モ</td><td class="code">－・・－・</td></tr>
+            <tr><td class="char">ム</td><td class="code">－</td>        <td class="char">セ</td><td class="code">・－－－・</td></tr>
+            <tr><td class="char">゛</td><td class="code">・・</td>      <td class="char">ス</td><td class="code">－－－・－</td></tr>
+            <tr class="under_double"><td class="char">゜</td><td class="code">・・－－・</td><td class="char">ン</td><td class="code">・－・－・</td></tr>
+            
+            <tr><td class="char">1</td><td class="code">・－－－－</td><td class="char">6</td><td class="code">－・・・・</td></tr>
+            <tr><td class="char">2</td><td class="code">・・－－－</td><td class="char">7</td><td class="code">－－・・・</td></tr>
+            <tr><td class="char">3</td><td class="code">・・・－－</td><td class="char">8</td><td class="code">－－－・・</td></tr>
+            <tr><td class="char">4</td><td class="code">・・・・－</td><td class="char">9</td><td class="code">－－－－・</td></tr>
+            <tr class="under_double"><td class="char">5</td><td class="code">・・・・・</td><td class="char">0</td><td class="code">－－－－－</td></tr>
+            
+            <tr><td class="char">ー</td><td class="code">・－－・－</td>  <td class="char">（</td><td class="code">－・－－・－</td></tr>
+            <tr><td class="char">、</td><td class="code">・－・－・－</td><td class="char">）</td><td class="code">・－・・－・</td></tr>
+            <tr><td class="char">」</td><td class="code">・－・－・・</td></tr>
+          </tbody>
+        </table>
+        <table id="table_ja_aiu" class="hide">
+          <thead>
+            <tr class="under_double"><th>文字</th><th>コード</th><th>文字</th><th>コード</th><th>文字</th><th>コード</th><th>文字</th><th>コード</th><th>文字</th><th>コード</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="char">ア</td><td class="code">－－・－－</td>
+              <td class="char">イ</td><td class="code">・－</td>
+              <td class="char">ウ</td><td class="code">・・－</td>
+              <td class="char">エ</td><td class="code">－・－－－</td>
+              <td class="char">オ</td><td class="code">・－・・・</td>
+            </tr>
+            <tr>
+              <td class="char">カ</td><td class="code">・－・・</td>
+              <td class="char">キ</td><td class="code">－・－・・</td>
+              <td class="char">ク</td><td class="code">・・・－</td>
+              <td class="char">ケ</td><td class="code">－・－－</td>
+              <td class="char">コ</td><td class="code">－－－－</td>
+            </tr>
+            <tr>
+              <td class="char">サ</td><td class="code">－・－・－</td>
+              <td class="char">シ</td><td class="code">－－・－・</td>
+              <td class="char">ス</td><td class="code">－－－・－</td>
+              <td class="char">セ</td><td class="code">・－－－・</td>
+              <td class="char">ソ</td><td class="code">－－－・</td>
+            </tr>
+            <tr>
+              <td class="char">タ</td><td class="code">－・</td>
+              <td class="char">チ</td><td class="code">・・－・</td>
+              <td class="char">ツ</td><td class="code">・－－・</td>
+              <td class="char">テ</td><td class="code">・－・－－</td>
+              <td class="char">ト</td><td class="code">・・－・・</td>
+            </tr>
+            <tr>
+              <td class="char">ナ</td><td class="code">・－・</td>
+              <td class="char">ニ</td><td class="code">－・－・</td>
+              <td class="char">ヌ</td><td class="code">・・・・</td>
+              <td class="char">ネ</td><td class="code">－－・－</td>
+              <td class="char">ノ</td><td class="code">・・－－</td>
+            </tr>
+            <tr>
+              <td class="char">ハ</td><td class="code">－・・・</td>
+              <td class="char">ヒ</td><td class="code">－－・・－</td>
+              <td class="char">フ</td><td class="code">－－・・</td>
+              <td class="char">ヘ</td><td class="code">・</td>
+              <td class="char">ホ</td><td class="code">－・・</td>
+            </tr>
+            <tr>
+              <td class="char">マ</td><td class="code">－・・－</td>
+              <td class="char">ミ</td><td class="code">・・－・－</td>
+              <td class="char">ム</td><td class="code">－</td>
+              <td class="char">メ</td><td class="code">－・・・－</td>
+              <td class="char">モ</td><td class="code">－・・－・</td>
+            </tr>
+            <tr>
+              <td class="char">ヤ</td><td class="code">・－－</td>
+              <td class="char"></td><td class="code"></td>
+              <td class="char">ユ</td><td class="code">－・・－－</td>
+              <td class="char"></td><td class="code"></td>
+              <td class="char">ヨ</td><td class="code">－－</td>
+            </tr>
+            <tr>
+              <td class="char">ラ</td><td class="code">・・・</td>
+              <td class="char">リ</td><td class="code">－－・</td>
+              <td class="char">ル</td><td class="code">－・－－・</td>
+              <td class="char">レ</td><td class="code">－－－</td>
+              <td class="char">ロ</td><td class="code">・－・－</td>
+            </tr>
+            <tr>
+              <td class="char">ワ</td><td class="code">－・－</td>
+              <td class="char">ヰ</td><td class="code">・－・・－</td>
+              <td class="char"></td><td class="code"></td>
+              <td class="char">ヱ</td><td class="code">・－－・・</td>
+              <td class="char">ヲ</td><td class="code">・－－－</td>
+            </tr>
+            <tr class="under_double">
+              <td class="char">ン</td><td class="code">・－・－・</td>
+              <td class="char">゛</td><td class="code">・・</td>
+              <td class="char">゜</td><td class="code">・・－－・</td>
+              <td class="char">ー</td><td class="code">・－－・－</td>
+              <td class="char">、</td><td class="code">・－・－・－</td>
+            </tr>
+
+            <tr>
+              <td class="char">1</td><td class="code">・－－－－</td>
+              <td class="char">2</td><td class="code">・・－－－</td>
+              <td class="char">3</td><td class="code">・・・－－</td>
+              <td class="char">4</td><td class="code">・・・・－</td>
+              <td class="char">5</td><td class="code">・・・・・</td>
+            </tr>
+            <tr>
+              <td class="char">6</td><td class="code">－・・・・</td>
+              <td class="char">7</td><td class="code">－－・・・</td>
+              <td class="char">8</td><td class="code">－－－・・</td>
+              <td class="char">9</td><td class="code">－－－－・</td>
+              <td class="char">0</td><td class="code">－－－－－</td>
+            </tr>
+
+            <tr>
+              <td class="char">」</td><td class="code">・－・－・・</td>
+              <td class="char">（</td><td class="code">－・－－・－</td>
+              <td class="char">）</td><td class="code">・－・・－・</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table id="table_el" class="hide">
+          <thead>
+            <tr class="under_double"><th>文字</th><th>コード</th><th>文字</th><th>コード</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="char">Α</td><td class="code">・－</td>    <td class="char">Ν</td><td class="code">－・</td>    </tr>
+            <tr><td class="char">Β</td><td class="code">－・・・</td><td class="char">Ξ</td><td class="code">－・・－</td></tr>
+            <tr><td class="char">Γ</td><td class="code">－－・</td>  <td class="char">Ο</td><td class="code">－－－</td>  </tr>
+            <tr><td class="char">Δ</td><td class="code">－・・</td>  <td class="char">Π</td><td class="code">・－－・</td></tr>
+            <tr><td class="char">Ε</td><td class="code">・</td>      <td class="char">Ρ</td><td class="code">・－・</td>  </tr>
+            <tr><td class="char">Ζ</td><td class="code">－－・・</td><td class="char">Σ</td><td class="code">・・・</td>  </tr>
+            <tr><td class="char">Η</td><td class="code">・・・・</td><td class="char">Τ</td><td class="code">－</td>      </tr>
+            <tr><td class="char">Θ</td><td class="code">－・－・</td><td class="char">Υ</td><td class="code">－・－－</td></tr>
+            <tr><td class="char">Ι</td><td class="code">・・</td>    <td class="char">Φ</td><td class="code">・・－・</td></tr>
+            <tr><td class="char">Κ</td><td class="code">－・－</td>  <td class="char">Χ</td><td class="code">－－－－</td></tr>
+            <tr><td class="char">Λ</td><td class="code">・－・・</td><td class="char">Ψ</td><td class="code">－－・－</td></tr>
+            <tr class="under_double"><td class="char">Μ</td><td class="code">－－</td>    <td class="char">Ω</td><td class="code">・－－</td>  </tr>
+
+            <tr><td class="char">1</td><td class="code">・－－－－</td><td class="char">6</td><td class="code">－・・・・</td></tr>
+            <tr><td class="char">2</td><td class="code">・・－－－</td><td class="char">7</td><td class="code">－－・・・</td></tr>
+            <tr><td class="char">3</td><td class="code">・・・－－</td><td class="char">8</td><td class="code">－－－・・</td></tr>
+            <tr><td class="char">4</td><td class="code">・・・・－</td><td class="char">9</td><td class="code">－－－－・</td></tr>
+            <tr class="under_double"><td class="char">5</td><td class="code">・・・・・</td><td class="char">0</td><td class="code">－－－－－</td></tr>
+
+            <tr><td class="char">.</td><td class="code">・－・－・－</td><td class="char">^</td><td class="code">・・・・・・</td></tr>
+            <tr><td class="char">,</td><td class="code">－－・・－－</td><td class="char">/</td><td class="code">－・・－・</td>  </tr>
+            <tr><td class="char">:</td><td class="code">－－－・・・</td><td class="char">@</td><td class="code">・－－・－・</td></tr>
+            <tr><td class="char">?</td><td class="code">・・－－・・</td><td class="char">(</td><td class="code">－・－－・</td>  </tr>
+            <tr><td class="char">_</td><td class="code">・・－－・－</td><td class="char">)</td><td class="code">－・－－・－</td></tr>
+            <tr><td class="char">+</td><td class="code">・－・－・</td>  <td class="char">"</td><td class="code">・－・・－・</td></tr>
+            <tr><td class="char">-</td><td class="code">－・・・・－</td><td class="char">'</td><td class="code">・－－－－・</td></tr>
+            <tr><td class="char">×</td><td class="code">－・・－</td>   <td class="char"></td><td class="code"></td></tr>
+            
+          </tbody>
+        </table>
+        <table id="table_cyri" class="hide">
+          <thead>
+            <tr class="under_double"><th>文字</th><th>コード</th><th>文字</th><th>コード</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="char">А</td><td class="code">・－</td>    <td class="char">Р</td><td class="code">・－・</td>    </tr>
+            <tr><td class="char">Б</td><td class="code">－・・・</td><td class="char">С</td><td class="code">・・・</td>    </tr>
+            <tr><td class="char">В</td><td class="code">・－－</td>  <td class="char">Т</td><td class="code">－</td>        </tr>
+            <tr><td class="char">Г</td><td class="code">－－・</td>  <td class="char">У</td><td class="code">・・－</td>    </tr>
+            <tr><td class="char">Ѓ</td><td class="code">－－・</td>  <td class="char">Ф</td><td class="code">・・－・</td>  </tr>
+            <tr><td class="char">Ґ</td><td class="code">－－・</td>  <td class="char">Х</td><td class="code">・・・・</td>  </tr>
+            <tr><td class="char">Д</td><td class="code">－・・</td>  <td class="char">Ц</td><td class="code">－・－・</td>  </tr>
+            <tr><td class="char">Е</td><td class="code">・</td>      <td class="char">Ч</td><td class="code">－－－・</td>  </tr>
+            <tr><td class="char">Ё</td><td class="code">・</td>      <td class="char">Ш</td><td class="code">－－－－</td>  </tr>
+            <tr><td class="char">Ж</td><td class="code">・・・－</td><td class="char">Щ</td><td class="code">－－・－</td>  </tr>
+            <tr><td class="char">З</td><td class="code">－－・・</td><td class="char">Ъ</td><td class="code">－・・－</td>  </tr>
+            <tr><td class="char">И</td><td class="code">・・</td>    <td class="char">Ь</td><td class="code">－・・－</td>  </tr>
+            <tr><td class="char">І</td><td class="code">・・</td>    <td class="char">Ы</td><td class="code">－・－－</td>  </tr>
+            <tr><td class="char">Й</td><td class="code">・－－－</td><td class="char">Ь</td><td class="code">－・－－</td>  </tr>
+            <tr><td class="char">Ј</td><td class="code">・－－－</td><td class="char">Э</td><td class="code">・・－・・</td></tr>
+            <tr><td class="char">К</td><td class="code">－・－</td>  <td class="char">Є</td><td class="code">・・－・・</td></tr>
+            <tr><td class="char">Ќ</td><td class="code">－・－</td>  <td class="char">Ю</td><td class="code">・・－－</td>  </tr>
+            <tr><td class="char">Л</td><td class="code">・－・・</td><td class="char">Я</td><td class="code">・－・－</td>  </tr>
+            <tr><td class="char">М</td><td class="code">－－</td>    <td class="char">Ђ</td><td class="code">－・・－－</td></tr>
+            <tr><td class="char">Н</td><td class="code">－・</td>    <td class="char">Ї</td><td class="code">・－－－・</td></tr>
+            <tr><td class="char">О</td><td class="code">－－－</td>  <td class="char">Љ</td><td class="code">・－－－・</td></tr>
+            <tr><td class="char">Ӧ</td><td class="code">－－－</td>  <td class="char">Њ</td><td class="code">－－・－－</td></tr>
+            <tr class="under_double"><td class="char">П</td><td class="code">・－－・</td><td class="char">Ћ</td><td class="code">－・－・・</td></tr>
+            
+            <tr><td class="char">1</td><td class="code">・－－－－</td><td class="char">6</td><td class="code">－・・・・</td></tr>
+            <tr><td class="char">2</td><td class="code">・・－－－</td><td class="char">7</td><td class="code">－－・・・</td></tr>
+            <tr><td class="char">3</td><td class="code">・・・－－</td><td class="char">8</td><td class="code">－－－・・</td></tr>
+            <tr><td class="char">4</td><td class="code">・・・・－</td><td class="char">9</td><td class="code">－－－－・</td></tr>
+            <tr class="under_double"><td class="char">5</td><td class="code">・・・・・</td><td class="char">0</td><td class="code">－－－－－</td></tr>
+
+            <tr><td class="char">.</td><td class="code">・－・－・－</td><td class="char">^</td><td class="code">・・・・・・</td></tr>
+            <tr><td class="char">,</td><td class="code">－－・・－－</td><td class="char">/</td><td class="code">－・・－・</td>  </tr>
+            <tr><td class="char">:</td><td class="code">－－－・・・</td><td class="char">@</td><td class="code">・－－・－・</td></tr>
+            <tr><td class="char">?</td><td class="code">・・－－・・</td><td class="char">(</td><td class="code">－・－－・</td>  </tr>
+            <tr><td class="char">_</td><td class="code">・・－－・－</td><td class="char">)</td><td class="code">－・－－・－</td></tr>
+            <tr><td class="char">+</td><td class="code">・－・－・</td>  <td class="char">"</td><td class="code">・－・・－・</td></tr>
+            <tr><td class="char">-</td><td class="code">－・・・・－</td><td class="char">'</td><td class="code">・－－－－・</td></tr>
+            <tr><td class="char">×</td><td class="code">－・・－</td>   <td class="char"></td><td class="code"></td></tr>
+            
+          </tbody>
+        </table>
+        <table id="table_hebr" class="hide">
+          <thead>
+            <tr class="under_double"><th>文字</th><th>コード</th><th>文字</th><th>コード</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="char">א</td><td class="code">・－</td>    <td class="char">ל</td><td class="code">・－・・</td></tr>
+            <tr><td class="char">ב</td><td class="code">－・・・</td><td class="char">מ</td><td class="code">－－</td>    </tr>
+            <tr><td class="char">ג</td><td class="code">－－・</td>  <td class="char">נ</td><td class="code">－・</td>    </tr>
+            <tr><td class="char">ד</td><td class="code">－・・</td>  <td class="char">ס</td><td class="code">－・－・</td></tr>
+            <tr><td class="char">ה</td><td class="code">－－－</td>  <td class="char">ע</td><td class="code">・－－－</td></tr>
+            <tr><td class="char">ו</td><td class="code">・</td>      <td class="char">פ</td><td class="code">・－－・</td></tr>
+            <tr><td class="char">ז</td><td class="code">－－・・</td><td class="char">צ</td><td class="code">・－－</td>  </tr>
+            <tr><td class="char">ח</td><td class="code">・・・・</td><td class="char">ק</td><td class="code">－－・－</td></tr>
+            <tr><td class="char">ט</td><td class="code">・・－</td>  <td class="char">ר</td><td class="code">・－・</td>  </tr>
+            <tr><td class="char">י</td><td class="code">・・</td>    <td class="char">ש</td><td class="code">・・・</td>  </tr>
+            <tr class="under_double"><td class="char">כ</td><td class="code">－・－</td>  <td class="char">ת</td><td class="code">－</td>      </tr>
+
+            <tr><td class="char">1</td><td class="code">・－－－－</td><td class="char">6</td><td class="code">－・・・・</td></tr>
+            <tr><td class="char">2</td><td class="code">・・－－－</td><td class="char">7</td><td class="code">－－・・・</td></tr>
+            <tr><td class="char">3</td><td class="code">・・・－－</td><td class="char">8</td><td class="code">－－－・・</td></tr>
+            <tr><td class="char">4</td><td class="code">・・・・－</td><td class="char">9</td><td class="code">－－－－・</td></tr>
+            <tr class="under_double"><td class="char">5</td><td class="code">・・・・・</td><td class="char">0</td><td class="code">－－－－－</td></tr>
+
+            <tr><td class="char">.</td><td class="code">・－・－・－</td><td class="char">^</td><td class="code">・・・・・・</td></tr>
+            <tr><td class="char">,</td><td class="code">－－・・－－</td><td class="char">/</td><td class="code">－・・－・</td>  </tr>
+            <tr><td class="char">:</td><td class="code">－－－・・・</td><td class="char">@</td><td class="code">・－－・－・</td></tr>
+            <tr><td class="char">?</td><td class="code">・・－－・・</td><td class="char">(</td><td class="code">－・－－・</td>  </tr>
+            <tr><td class="char">_</td><td class="code">・・－－・－</td><td class="char">)</td><td class="code">－・－－・－</td></tr>
+            <tr><td class="char">+</td><td class="code">・－・－・</td>  <td class="char">"</td><td class="code">・－・・－・</td></tr>
+            <tr><td class="char">-</td><td class="code">－・・・・－</td><td class="char">'</td><td class="code">・－－－－・</td></tr>
+            <tr><td class="char">×</td><td class="code">－・・－</td>   <td class="char"></td><td class="code"></td></tr>
+            
+          </tbody>
+        </table>
+        <table id="table_arab" class="hide">
+          <thead>
+            <tr class="under_double"><th>文字</th><th>コード</th><th>文字</th><th>コード</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="char">ا</td><td class="code">・－</td>    <td class="char">ط</td><td class="code">・・－</td>    </tr>
+            <tr><td class="char">ب</td><td class="code">－・・・</td><td class="char">ظ</td><td class="code">－・－－</td>  </tr>
+            <tr><td class="char">ت</td><td class="code">－</td>      <td class="char">ع</td><td class="code">・－・－</td>  </tr>
+            <tr><td class="char">ث</td><td class="code">－・－・</td><td class="char">غ</td><td class="code">－－・</td>    </tr>
+            <tr><td class="char">ج</td><td class="code">・－－－</td><td class="char">ف</td><td class="code">・・－・</td>  </tr>
+            <tr><td class="char">ح</td><td class="code">・・・・</td><td class="char">ق</td><td class="code">－－・－</td>  </tr>
+            <tr><td class="char">خ</td><td class="code">－－－</td>  <td class="char">ك</td><td class="code">－・－</td>    </tr>
+            <tr><td class="char">د</td><td class="code">－・・</td>  <td class="char">ل</td><td class="code">・－・・</td>  </tr>
+            <tr><td class="char">ذ</td><td class="code">－－・・</td><td class="char">م</td><td class="code">－－</td>      </tr>
+            <tr><td class="char">ر</td><td class="code">・－・</td>  <td class="char">ن</td><td class="code">－・</td>      </tr>
+            <tr><td class="char">ز</td><td class="code">－－－・</td><td class="char">ه</td><td class="code">・・－・・</td></tr>
+            <tr><td class="char">س</td><td class="code">・・・</td>  <td class="char">و</td><td class="code">・－－</td>    </tr>
+            <tr><td class="char">ش</td><td class="code">－－－－</td><td class="char">ي</td><td class="code">・・</td>      </tr>
+            <tr><td class="char">ص</td><td class="code">－・・－</td><td class="char">ﺀ</td><td class="code">・</td>        </tr>
+            <tr class="under_double"><td class="char">ض</td><td class="code">・・・－</td><td class="char"></td><td class="code"></td>           </tr>
+            
+            <tr><td class="char">1</td><td class="code">・－－－－</td><td class="char">6</td><td class="code">－・・・・</td></tr>
+            <tr><td class="char">2</td><td class="code">・・－－－</td><td class="char">7</td><td class="code">－－・・・</td></tr>
+            <tr><td class="char">3</td><td class="code">・・・－－</td><td class="char">8</td><td class="code">－－－・・</td></tr>
+            <tr><td class="char">4</td><td class="code">・・・・－</td><td class="char">9</td><td class="code">－－－－・</td></tr>
+            <tr class="under_double"><td class="char">5</td><td class="code">・・・・・</td><td class="char">0</td><td class="code">－－－－－</td></tr>
+
+            <tr><td class="char">.</td><td class="code">・－・－・－</td><td class="char">^</td><td class="code">・・・・・・</td></tr>
+            <tr><td class="char">,</td><td class="code">－－・・－－</td><td class="char">/</td><td class="code">－・・－・</td>  </tr>
+            <tr><td class="char">:</td><td class="code">－－－・・・</td><td class="char">@</td><td class="code">・－－・－・</td></tr>
+            <tr><td class="char">?</td><td class="code">・・－－・・</td><td class="char">(</td><td class="code">－・－－・</td>  </tr>
+            <tr><td class="char">_</td><td class="code">・・－－・－</td><td class="char">)</td><td class="code">－・－－・－</td></tr>
+            <tr><td class="char">+</td><td class="code">・－・－・</td>  <td class="char">"</td><td class="code">・－・・－・</td></tr>
+            <tr><td class="char">-</td><td class="code">－・・・・－</td><td class="char">'</td><td class="code">・－－－－・</td></tr>
+            <tr><td class="char">×</td><td class="code">－・・－</td>   <td class="char"></td><td class="code"></td></tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script type="text/javascript" src="morse.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>
