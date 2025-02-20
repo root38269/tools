@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <title>シーザー暗号ツール</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="page_title">
+        シーザー暗号ツール
+      </div>
+      <div class="description">
+        シーザー暗号とは…文字を特定の数だけ「ずらす」ことによる暗号方式。
+        <a href="https://ja.wikipedia.org/wiki/%E3%82%B7%E3%83%BC%E3%82%B6%E3%83%BC%E6%9A%97%E5%8F%B7">wikipedia</a>
+      </div>
+      <div class="section close">
+        <div class="section_title">
+          <div class="oc_button"></div>
+          設定
+        </div>
+        <div class="section_body">
+          <input type="checkbox" checked id="before_dakuten_split">
+          <label for="before_dakuten_split">
+            変換前に濁点を分解する
+          </label><br>
+          <input type="checkbox" checked id="after_dakuten_integrate">
+          <label for="after_dakuten_integrate">
+            変換後に濁点を統合する
+          </label><br>
+          <input type="checkbox" checked id="before_kogaki_conv">
+          <label for="before_kogaki_conv">
+            変換前に小文字(ゃ、っ、ぁ)を大文字(や、つ、あ)に置換する
+          </label><br>
+          ルール
+          <div class="rules">
+            <input type="radio" checked name="char_set" id="char_set_default">
+            <label for="char_set_default">デフォルト</label><br>
+            <input type="radio" name="char_set" id="char_set_custom">
+            <label for="char_set_custom">カスタム</label><br>
+            <div class="custom_set" id="custom_set">
+              <!--
+              <div class="char_set">
+                <input type="button" disabled value="×" class="delete_rule">
+                <input type="text" disabled class="rule" value="あ,い,う,え,お,か,き,く,け,こ,さ,し,す,せ,そ,た,ち,つ,て,と,な,に,ぬ,ね,の,は,ひ,ふ,へ,ほ,ま,み,む,め,も,や,ゆ,よ,ら,り,る,れ,ろ,わ,を,ん">
+              </div>
+              <div class="char_set">
+                <input type="button" disabled value="×" class="delete_rule">
+                <input type="text" disabled class="rule" value="ア,イ,ウ,エ,オ,カ,キ,ク,ケ,コ,サ,シ,ス,セ,ソ,タ,チ,ツ,テ,ト,ナ,ニ,ヌ,ネ,ノ,ハ,ヒ,フ,ヘ,ホ,マ,ミ,ム,メ,モ,ヤ,ユ,ヨ,ラ,リ,ル,レ,ロ,ワ,ヲ,ン">
+              </div>
+              <div class="char_set">
+                <input type="button" disabled value="×" class="delete_rule">
+                <input type="text" disabled class="rule" value="a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z">
+              </div>
+              <div class="char_set">
+                <input type="button" disabled value="×" class="delete_rule">
+                <input type="text" disabled class="rule" value="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z">
+              </div>
+              -->
+              <div class="char_set" id="last_rule_set">
+                <input type="button" disabled value="+" class="add_rule" id="add_rule">
+              </div>
+              
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="section open">
+        <div class="section_title">
+          <div class="oc_button"></div>
+          暗号化・復号
+        </div>
+        <div class="section_body">
+          <div class="description nowrap">
+            暗号化または復号したい文章を「文章」欄に入力します。<br>
+            ずらす数が決まっている場合は「数」欄に入力します。<br>
+            「数」欄が空欄の場合は、変換後の評価値が高いものが上に表示されます。(評価値は参考値です。)
+          </div>
+          文章:<input type="text" value="QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD" id="plain_text" class="plain_text"><br>
+          数　:<input type="number" value="" step="1" id="caesar_num" class="caesar_num">
+          (省略できます)<br>
+          <input type="button" value="実行" id="caesar_exe">
+          <div id="caesar_result" class="caesar_result">
+            <div class="result_header" style="grid-area: 1/1/2/4;">結果</div>
+            <div class="number_label left" style="grid-row: 2;">--</div>
+            <input class="result_text" style="grid-row: 2;">
+            <div class="number_label right" style="grid-row: 2;">--</div>
+            <div class="result_header" style="grid-area: 3/1/4/4;">すべての結果</div>
+            <!--
+            -->  
+          </div>
+          
+        </div>
+      </div>
+      <div style="height: 20px;"></div>
+    </div>
+
+    <script type="text/javascript" src="caesar.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>
