@@ -1,0 +1,141 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+body {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+.wrapper {
+  min-height: calc(100% - 8px);
+  width: calc(100% - 16px);
+  margin: 8px;
+  margin-bottom: 0;
+}
+.page_title {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.section {
+  margin-bottom: 15px;
+}
+.section_title {
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+}
+.oc_button {
+  height: 20px;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  border: solid 1px black;
+  user-select: none;
+  cursor: pointer;
+}
+.section.open .oc_button::after {
+  content: "-";
+  line-height: 1em;
+}
+.section.close .oc_button::after {
+  content: "+";
+  line-height: 1em;
+}
+
+.section_body {
+  margin-left: 40px;
+  margin-top: 10px;
+}
+.section.close .section_body {
+  display: none;
+}
+.description {
+  margin-bottom: 15px;
+}
+
+
+
+.caesar_result {
+  display: grid;
+  grid-template-columns: 50px 1fr 80px;
+  grid-template-rows: repeat(4, 1.5lh);
+  align-items: center;
+
+  max-height: calc(100vh - 450px);
+  min-height: 200px;
+  margin-top: 20px;
+  overflow-y: scroll;
+
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
+  
+}
+.caesar_result:last-child::after {
+  content: "";
+  position: relative;
+  top: 0;
+  height: 0.5lh;
+}
+.number_label {
+  margin: 0 5px;
+}
+.number_label.left {
+  grid-column: 1;
+  text-align: right;
+}
+.number_label.right {
+  grid-column: 3;
+  text-align: left;
+}
+.result_text {
+  grid-column: 2;
+  height: 1.2lh;
+  margin: 0 5px;
+}
+.result_header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: #eef;
+  position: sticky;
+  top: 0;
+}
+
+.plain_text {
+  width: calc(100% - 80px);
+}
+.caesar_num {
+  width: 100px;
+}
+
+.rules {
+  margin-left: 10px;
+}
+.custom_set {
+  margin-left: 15px;
+}
+.custom_set input.rule {
+  width: calc(100% - 50px);
+}
+.custom_set input.delete_rule,.custom_set input.add_rule {
+  width: 1.5em;
+}
+
+
+input {
+  font-size: 1rem;
+}
+label {
+  user-select: none;
+}
+.nowrap {
+  white-space: nowrap;
+  overflow-x: scroll;
+}
