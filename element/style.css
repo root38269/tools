@@ -18,6 +18,7 @@ body {
 }
 .wrapper {
   display: flex;
+  flex-direction: row;
   min-height: calc(100% - 8px);
   width: calc(100% - 16px);
   margin: 8px;
@@ -33,12 +34,17 @@ body {
 .table_body {
   position: relative;
   display: grid;
-  grid-template-rows: calc(var(--cell-height) * 0.5) repeat(7, var(--cell-height)) calc(var(--cell-height) * 0.2) repeat(2, var(--cell-height)) calc(var(--cell-height) * 0.2);
-  grid-template-columns: calc(var(--cell-width) * 0.7) repeat(18, var(--cell-width)) calc(var(--cell-width) * 0.5);
+  grid-template-rows: calc(var(--cell-height) * 0.5) repeat(7, var(--cell-height)) calc(var(--cell-height) * 0.2) repeat(2, var(--cell-height));
+  grid-template-columns: calc(var(--cell-width) * 0.7) repeat(18, var(--cell-width));
   gap: var(--cell-gap);
 
   width: 100%;
   margin-bottom: 10px;
+  padding-top: calc(calc(calc(var(--cell-height) * calc(var(--hover-zoom-rate) - 1)) * 0.5) + 5px);
+  padding-bottom: calc(calc(calc(var(--cell-height) * calc(var(--hover-zoom-rate) - 1)) * 0.5) + 25px);
+  padding-left: calc(calc(calc(var(--cell-width) * calc(var(--hover-zoom-rate) - 1)) * 0.5) + 5px);
+  padding-right: calc(calc(calc(var(--cell-width) * calc(var(--hover-zoom-rate) - 1)) * 0.5) + 25px);
+  box-sizing: border-box;
   overflow-x: scroll;
 
 }
@@ -122,8 +128,11 @@ body {
 .decompose_result,.search_result {
   display: grid;
   gap: var(--cell-gap);
-  margin-top: 15px;
-  margin-bottom: 20px;
+  padding-top: calc(calc(calc(var(--cell-height) * calc(var(--hover-zoom-rate) - 1)) * 0.5) + 5px);
+  padding-bottom: calc(calc(calc(var(--cell-height) * calc(var(--hover-zoom-rate) - 1)) * 0.5) + 25px);
+  padding-left: calc(calc(calc(var(--cell-width) * calc(var(--hover-zoom-rate) - 1)) * 0.5) + 5px);
+  padding-right: calc(calc(calc(var(--cell-width) * calc(var(--hover-zoom-rate) - 1)) * 0.5) + 25px);
+  overflow-x: scroll;
 }
 
 
@@ -254,4 +263,33 @@ body {
 }
 .close_button::before {
   transform: rotate(45deg);
+}
+
+
+
+
+
+@media (max-width: 768px) {
+  html {
+    --cell-size-unit: 7;
+  }
+  .wrapper {
+    flex-direction: column;
+    min-height: auto;
+    height: calc(100% - 8px);
+  }
+  .content_area {
+    width: 100%;
+    height: calc(100% - 230px);
+    overflow-y: scroll;
+  }
+  .side_area.show {
+    flex-basis: 240px;  
+    border-left: none;
+    border-top: solid 1px black;
+  }
+  .close_button {
+    position: absolute;
+  }
+
 }
