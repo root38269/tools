@@ -133,6 +133,7 @@ const div_caesar_result = document.getElementById("caesar_result");
 input_caesar_exe.addEventListener("click", function (event) {
   set_rule();
   let text = input_plain_text.value;
+  if (text === "") text = "QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD";
   if (before_kogaki_conv) {
     text = kogaki_conv(text);
   }
@@ -242,18 +243,41 @@ function add_result_field (row, result) {
   div_numlabel.style.gridRow = String(row);
   div_numlabel.innerText = add_pm(result.num);
   /**@type {HTMLInputElement} */
-  let input_result_text = document.createElement("input");
-  input_result_text.classList.add("result_text");
-  input_result_text.style.gridRow = String(row);
-  input_result_text.value = result.str;
-  input_result_text.readOnly = true;
+  // let input_result_text = document.createElement("input");
+  // input_result_text.classList.add("result_text");
+  // input_result_text.style.gridRow = String(row);
+  // input_result_text.value = result.str;
+  // input_result_text.readOnly = true;
+  let div_result_text = document.createElement("div");
+  div_result_text.classList.add("result_text");
+  div_result_text.style.gridRow = String(row);
+  div_result_text.innerText = result.str;
+  div_result_text.addEventListener("contextmenu", div_result_text_listener);
+
   let div_numlabel2 = document.createElement("div");
   div_numlabel2.classList.add("number_label", "right");
   div_numlabel2.style.gridRow = String(row);
   div_numlabel2.innerText = format_number(result.eval);
   div_caesar_result.appendChild(div_numlabel);
-  div_caesar_result.appendChild(input_result_text);
+  // div_caesar_result.appendChild(input_result_text);
+  div_caesar_result.appendChild(div_result_text);
   div_caesar_result.appendChild(div_numlabel2);
+}
+
+/**
+ * 
+ * @param {MouseEvent} event 
+ */
+function div_result_text_listener (event) {
+  /**@type {HTMLDivElement} */
+  let div_result_text = event.currentTarget;
+  let textNode = div_result_text.childNodes[0];
+  let selection = window.getSelection();
+  let range = document.createRange();
+  range.setStart(textNode, 0);
+  range.setEnd(textNode, textNode.length);
+  if (selection.rangeCount > 0) selection.removeAllRanges();
+  selection.addRange(range);
 }
 
 
